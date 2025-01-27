@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズページ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        h1 {
+            font-size: 1.8em;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function checkAnswers() {
+            const correctAnswers = {
+                q1: ["スピード", "速度", "速さ"],
+                q2: ["福岡県", "福岡", "ふくおか", "ふくおかけん"],
+                q3: ["四", "よん", "4", "４"],
+                q4: ["たまねぎ"]
+            };
+            let allCorrect = true;
+            let errorMessage = "";
+            for (const [question, correctList] of Object.entries(correctAnswers)) {
+                const userAnswer = document.querySelector(`#${question}`).value.trim();
+                if (!correctList.includes(userAnswer)) {
+                    allCorrect = false;
+                    errorMessage += `問題${question.slice(-1)}が間違っています。\n`;
+                }
+            }
+            if (allCorrect) {
+                alert("全問正解！おめでとうございます！");
+                window.location.href = "success.html";
+            } else {
+                alert(`全問クリアならず！\n${errorMessage}`);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>OneCast クイズ</h1>
+    <p>すべての問題をクリアできた方のみ審査フォームを送らせていただきます</p>
+    <form>
+        <p>1. ジャガイモ・タマネギ・ニンジンを積んで走っているトラックが、急カーブの際に落としたのは何？<br>
+            <input type="text" id="q1" placeholder="答えを入力">
+        </p>
+        <p>2. ハンガーを使わなそうな都道府県はどーこだ？<br>
+            <input type="text" id="q2" placeholder="答えを入力">
+        </p>
+        <p>3. 数字の8を口に入れたら違う数字になったよ。いくつになった？<br>
+            <input type="text" id="q3" placeholder="答えを入力">
+        </p>
+        <p>4. 合言葉は？<br>
+            <input type="text" id="q4" placeholder="答えを入力">
+        </p>
+        <button type="button" onclick="checkAnswers()">結果を確認</button>
+    </form>
+</body>
+</html>
