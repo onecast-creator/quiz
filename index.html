@@ -14,25 +14,27 @@
             line-height: 1.8;
         }
         h1 {
-            font-size: 1.8em;
+            font-size: 1.3em;
+            margin-bottom: 20px;
         }
         p {
             font-size: 1.2em;
             margin: 20px 0;
         }
         input {
-            padding: 10px;
             font-size: 1em;
-            background-color: #333;
-            color: #fff;
-            border: 1px solid #fff;
+            padding: 5px;
+            margin-top: 10px;
         }
         button {
-            padding: 10px 20px;
             font-size: 1em;
+            padding: 10px 20px;
+            margin-top: 20px;
             background-color: #007bff;
             color: #fff;
             border: none;
+            cursor: pointer;
+            border-radius: 5px;
         }
         button:hover {
             background-color: #0056b3;
@@ -40,45 +42,45 @@
     </style>
     <script>
         function checkAnswers() {
+            // 正解リスト
             const correctAnswers = {
-                q1: ["スピード", "速度", "速さ"],
-                q2: ["福岡県", "福岡", "ふくおか", "ふくおかけん"],
-                q3: ["四", "よん", "4", "４"],
-                q4: ["たまねぎ"]
+                q1: ["INFP"], // 問題1の正解
+                q2: ["中二病", "厨二病"], // 問題2の正解
+                q3: ["迷い", "まよい", "迷う"] // 問題3の正解
             };
+
             let allCorrect = true;
-            let errorMessage = "";
+
+            // 各入力欄の回答を取得してチェック
             for (const [question, correctList] of Object.entries(correctAnswers)) {
                 const userAnswer = document.querySelector(`#${question}`).value.trim();
+                // 入力が正解リストのどれかと一致するか確認
                 if (!correctList.includes(userAnswer)) {
                     allCorrect = false;
-                    errorMessage += `問題${question.slice(-1)}が間違っています。\n`;
+                    break;
                 }
             }
+
+            // 判定結果
             if (allCorrect) {
-                alert("全問正解！おめでとうございます！");
-                window.location.href = "success.html";
+                window.location.href = "success.html"; // 全問正解のページへ
             } else {
-                alert(`全問クリアならず！\n${errorMessage}`);
+                alert("全問クリアならず\nまたのお申込みをお待ちしております");
             }
         }
     </script>
 </head>
 <body>
-    <h1>OneCast クイズ</h1>
-    <p>すべての問題をクリアできた方のみ審査フォームを送らせていただきます</p>
+    <h1>入会希望者クイズ</h1>
     <form>
-        <p>1. ジャガイモ・タマネギ・ニンジンを積んで走っているトラックが、急カーブの際に落としたのは何？<br>
+        <p>1. 遠藤さんのMBTIは？<br>
             <input type="text" id="q1" placeholder="答えを入力">
         </p>
-        <p>2. ハンガーを使わなそうな都道府県はどーこだ？<br>
+        <p>2. よしけんさんのかかっている病は？<br>
             <input type="text" id="q2" placeholder="答えを入力">
         </p>
-        <p>3. 数字の8を口に入れたら違う数字になったよ。いくつになった？<br>
+        <p>3. ブランディングの一番の敵は？<br>
             <input type="text" id="q3" placeholder="答えを入力">
-        </p>
-        <p>4. 合言葉は？<br>
-            <input type="text" id="q4" placeholder="答えを入力">
         </p>
         <button type="button" onclick="checkAnswers()">結果を確認</button>
     </form>
